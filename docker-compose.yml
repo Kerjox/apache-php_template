@@ -5,15 +5,38 @@ version: '3'
 services:
   apache-php:
     container_name: apache-php
-    image: php:8.0.5-apache
+    build: ./apache/
     ports: 
       - 0.0.0.0:80:80
     volumes:
       - type: bind
         source: ./src
         target: /var/www/html/
+    links:
+      - db:database
+    networks:
+        - default
+            
+            
+  db:
+    image: mariadb
+    ports: 
+      - "3306:3306"
+    environment:
+        MYSQL_DATABASE: netflix
+        MYSQL_USER: user
+        MYSQL_PASSWORD: IVSZ2e12
+        MYSQL_ROOT_PASSWORD: IVSZ2e12
+    volumes:
+        - ./mariadb/sql:/docker-entrypoint-initdb.d
+        - mysql-apache:/var/lib/mysql
+    networks:
+        - default
     
 volumes:
   apache-php:
     name: apache-php-volume
+  mysql-apache:
+    name: mysql-apache-volume
+    
 
