@@ -1,6 +1,5 @@
 <?php
 
-//$database_name = $_GET["db"];
 $database_name = "netflix";
 $mysqli = mysqli_connect("database", "root", "IVSZ2e12", $database_name);
 

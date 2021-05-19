@@ -4,7 +4,7 @@
 
     $city = $_POST['city'];
 
-    $query = "SELECT e.id_empleado, e.nombre, e.apellidos, e.email FROM empleado e INNER JOIN direccion d
+    $query = "SELECT e.id_empleado, e.nombre, e.apellidos, e.email FROM empleado_copia e INNER JOIN direccion d
                 on e.id_direccion = d.id_direccion INNER JOIN ciudad c
                     on d.id_ciudad = c.id_ciudad
                         WHERE c.nombre = '$city';";
@@ -17,6 +17,7 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>@ Email</th>
+                <th>Actions</th>
             </tr>
         </thead>
     <tbody>";
@@ -29,10 +30,11 @@
             
             $table .= 
             "<tr>
-            <td><b>".$fila['id_empleado']."</b></td>
-            <td>".$fila['nombre']."</td>
-            <td>".$fila['apellidos']."</td>
-            <td>".$fila['email']."</td>
+                <td><b>".$fila['id_empleado']."</b></td>
+                <td>".$fila['nombre']."</td>
+                <td>".$fila['apellidos']."</td>
+                <td>".$fila['email']."</td>
+                <td><a href=\"removeEmpleado.php?id_empleado=$fila[id_empleado]\"><i class=\"far fa-trash-alt\"></i></a></td>
             </tr>";
         }
         
@@ -52,6 +54,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/fontawesome/css/all.min.css">
     <title>Resultado ciudad</title>
 </head>
 <body>
@@ -65,4 +68,3 @@
     <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
-
